@@ -44,6 +44,15 @@ let comprardaño=document.getElementById("comprar_mejora_daño");
 let textdaño = document.getElementById("texto-daño-actual");
 let textdaño_oro = document.getElementById("texto-daño-actual_oro");
 
+// Cache DOM elements for performance
+const cachedSaludBarra = document.getElementById("salud");
+const cachedSaludTieneTexto = document.getElementById("salud-tiene-texto");
+const cachedSaludTotalTexto = document.getElementById("salud-total-texto");
+const cachedGritoBoss1 = document.getElementById("gritoboss1");
+const cachedMultDanoTexto = document.querySelector(".mult-daño-texto");
+const cachedOroTexto = document.querySelector(".oro-texto");
+const cachedMultPuntosTexto = document.querySelector(".mult-puntos-texto");
+
 
 //! TODA LA PARTE DE CAMBIAR DE PANTALLA
 const home=document.getElementsByClassName("returnhome")
@@ -181,14 +190,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    // let barra=document.getElementById("salud"); // Optimized: using cachedSaludBarra
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    cachedSaludBarra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    cachedSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    cachedSaludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,8 +223,8 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+                        // Optimized: using cachedGritoBoss1
+                        cachedGritoBoss1.play();
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
@@ -240,9 +249,9 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            cachedMultDanoTexto.innerText=player.caracteristicas.daño;
+            cachedOroTexto.innerText =player.economia.oro;
+            cachedMultPuntosTexto.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
