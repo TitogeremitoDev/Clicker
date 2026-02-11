@@ -14,7 +14,7 @@ let player = {
         contadormuertos:0,
         contadormuertosboss:0
         },
-    
+
     economia:{
         oro:1,
         gemas:0
@@ -24,7 +24,7 @@ let player = {
         daño: 1
         //AQUI AÑADIREMOS OTRAS CARACTERISTICAS COMO PROB CRITICO O DAÑO CRITICO.
     }
-    
+
 }
 player.nombre = prompt("¿Cual es tu nombre aventurero?");
 
@@ -43,6 +43,11 @@ let comprardaño=document.getElementById("comprar_mejora_daño");
 //*Aqui van a ir el texto que informa de daño y oro.
 let textdaño = document.getElementById("texto-daño-actual");
 let textdaño_oro = document.getElementById("texto-daño-actual_oro");
+
+// OPTIMIZACION: Cachear elementos del DOM para evitar busquedas repetitivas en el bucle de daño continuo
+const saludBarra = document.getElementById("salud");
+const saludTextoActual = document.getElementById("salud-tiene-texto");
+const saludTextoTotal = document.getElementById("salud-total-texto");
 
 
 //! TODA LA PARTE DE CAMBIAR DE PANTALLA
@@ -83,9 +88,9 @@ function actualizarzIndex (zIndexHome, zIndexMejoras, zIndexBoss, zIndexHeroes, 
     fondos.mejoras.style.zIndex = zIndexMejoras;    //1
     fondos.boss.style.zIndex = zIndexBoss;          //2
     fondos.heroes.style.zIndex = zIndexHeroes       //3
-    fondos.compras.style.zIndex=zIndexCompras       //4   
-    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5   
-    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6      
+    fondos.compras.style.zIndex=zIndexCompras       //4
+    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5
+    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6
 }
 
 //HOME
@@ -181,14 +186,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    // let barra=document.getElementById("salud"); // OPTIMIZACION: Usar variable cacheada
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    saludBarra.style.width= barrainicial+"%"; // OPTIMIZACION: Usar variable cacheada
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTextoActual.textContent=saludqueda.toFixed(2); // OPTIMIZACION: Usar variable cacheada
+    saludTextoTotal.textContent=saludinicial.toFixed(2); // OPTIMIZACION: Usar variable cacheada
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -198,15 +203,15 @@ function dañocontinuo(damage){
 const dañocontinuorep = setInterval(function() {
     dañocontinuo(player.caracteristicas.daño);}, 500);
 
-function muerteboss(){ 
+function muerteboss(){
 
     let aleatorio = Math.floor(Math.random()*listabossessinusar.length);
-        if (saludqueda<=0){  
-            boss.src = listabossessinusar[aleatorio];  
+        if (saludqueda<=0){
+            boss.src = listabossessinusar[aleatorio];
 
         //ELIMINAR EL BOSS DE LA LISTA NORMAL PARA QUE NO SE REPITAN.
-        listabossessinusar.splice(aleatorio,1);     
-        
+        listabossessinusar.splice(aleatorio,1);
+
             if (listabossessinusar.length===0){
                 listabossessinusar=[].concat(slimes);
             }
@@ -222,10 +227,10 @@ function muerteboss(){
                         player.progresion.contadormuertosboss+=1;
                         boss10ejecutado = true;
                         boss10aparecer = false;
-                        alert("Enhorabuena, has matado al elemental de sombra."); 
+                        alert("Enhorabuena, has matado al elemental de sombra.");
                         multOro = multOro*10;
-                    }  
-           
+                    }
+
             barrainicial=60;
             saludinicial+=1;
             vidainicial+=1;
@@ -234,10 +239,10 @@ function muerteboss(){
             player.progresion.etapa+=1;
 
 
-        
+
             // AGREGAR LA Oro POR CADA BOSS.
-            player.economia.oro += 1*multOro;    
-            
+            player.economia.oro += 1*multOro;
+
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
             document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
@@ -277,12 +282,12 @@ comprardaño.addEventListener("click",function(){
         player.economia.oro-=1
         player.caracteristicas.daño+=1;
         }
-    
+
     else if(player.caracteristicas.daño>=10 && player.economia.oro>=10){
         player.economia.oro-=10
         player.caracteristicas.daño+=1;
         }
-        
+
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
         document.querySelector(".mult-daño-texto").innerText=daño;
@@ -351,7 +356,6 @@ document.getElementById('espec2').addEventListener('click', function() {
 document.getElementById('salvar-partida').addEventListener('click', function() {
     //GENERAMOS UNA LISTA CON EL OBJETO DESEADO
     player_lista = JSON.stringify(player);
-    //GUARDAMOS EN NUESTRO LOCAL STORE.º    
+    //GUARDAMOS EN NUESTRO LOCAL STORE.º
     localStorage.setItem(player.nombre,player_lista)
 });
-
