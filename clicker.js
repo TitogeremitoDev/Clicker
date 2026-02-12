@@ -180,15 +180,19 @@ boss.addEventListener("click",function(){
 
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
-function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
-    damage = player.caracteristicas.daño*0.1
+// Cachear elementos del DOM para evitar consultas constantes
+const barraSalud = document.getElementById("salud");
+const textoSaludTiene = document.getElementById("salud-tiene-texto");
+const textoSaludTotal = document.getElementById("salud-total-texto");
+
+function dañocontinuo(){
+    let damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    barraSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    textoSaludTiene.textContent=saludqueda.toFixed(2);
+    textoSaludTotal.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -196,7 +200,7 @@ function dañocontinuo(damage){
 //* CONDICIONES CUANDO MUERE EL BOSS.
 //? AQUI VOY A IR DEJANDO LAS FUNCIONES
 const dañocontinuorep = setInterval(function() {
-    dañocontinuo(player.caracteristicas.daño);}, 500);
+    dañocontinuo();}, 500);
 
 function muerteboss(){ 
 
