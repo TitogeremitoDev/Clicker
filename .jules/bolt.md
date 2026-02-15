@@ -1,0 +1,3 @@
+## 2024-05-23 - DOM Query Caching in Game Loops
+**Learning:** In `clicker.js`, the `dañocontinuo` function (running every 500ms) and `muerteboss` were querying the DOM repeatedly for the same elements (`getElementById`). While `jsdom` benchmarks showed only a marginal improvement (~1%) due to the small DOM size, this pattern causes significant layout thrashing and overhead in real browser environments, especially on mobile.
+**Action:** Always cache DOM element references (e.g., `document.getElementById`) outside of high-frequency loops or event handlers. Using a central `ui` object or top-level constants prevents unnecessary DOM traversal and potential reflows.
