@@ -14,7 +14,7 @@ let player = {
         contadormuertos:0,
         contadormuertosboss:0
         },
-    
+
     economia:{
         oro:1,
         gemas:0
@@ -24,7 +24,7 @@ let player = {
         daño: 1
         //AQUI AÑADIREMOS OTRAS CARACTERISTICAS COMO PROB CRITICO O DAÑO CRITICO.
     }
-    
+
 }
 player.nombre = prompt("¿Cual es tu nombre aventurero?");
 
@@ -37,12 +37,27 @@ const audiohome = document.getElementById('audiohome');
 cualquierlugar[0].addEventListener('click', function() {
         audiohome.play();
 });
+
+// OPTIMIZATION: Cache DOM elements to avoid repeated queries in game loops
+const ui = {
+    barraSalud: document.getElementById("salud"),
+    saludTieneTexto: document.getElementById("salud-tiene-texto"),
+    saludTotalTexto: document.getElementById("salud-total-texto"),
+    oroTexto: document.querySelector(".oro-texto"),
+    multDanoTexto: document.querySelector(".mult-daño-texto"),
+    multPuntosTexto: document.querySelector(".mult-puntos-texto"),
+    hitAudio: document.getElementById("hit1"),
+    bossAudio: document.getElementById("gritoboss1"),
+    attackImg: document.getElementById('ataquealboss'),
+    textDaño: document.getElementById("texto-daño-actual"),
+    textDañoOro: document.getElementById("texto-daño-actual_oro")
+};
+
 //! VARIABLES DE LA PANTALLA DE MEJORAS
 let comprardaño=document.getElementById("comprar_mejora_daño");
 
 //*Aqui van a ir el texto que informa de daño y oro.
-let textdaño = document.getElementById("texto-daño-actual");
-let textdaño_oro = document.getElementById("texto-daño-actual_oro");
+// Replaced by ui.textDaño and ui.textDañoOro
 
 
 //! TODA LA PARTE DE CAMBIAR DE PANTALLA
@@ -83,9 +98,9 @@ function actualizarzIndex (zIndexHome, zIndexMejoras, zIndexBoss, zIndexHeroes, 
     fondos.mejoras.style.zIndex = zIndexMejoras;    //1
     fondos.boss.style.zIndex = zIndexBoss;          //2
     fondos.heroes.style.zIndex = zIndexHeroes       //3
-    fondos.compras.style.zIndex=zIndexCompras       //4   
-    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5   
-    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6      
+    fondos.compras.style.zIndex=zIndexCompras       //4
+    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5
+    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6
 }
 
 //HOME
@@ -139,7 +154,7 @@ let saludqueda = 10;
 let multOro =1
 
 
-document.querySelector(".oro-texto").innerText =player.economia.oro;
+ui.oroTexto.innerText =player.economia.oro;
 
 // let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
 
@@ -163,17 +178,15 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+    ui.hitAudio.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    ui.barraSalud.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    ui.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    ui.saludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +194,13 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    ui.barraSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    ui.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    ui.saludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -198,15 +210,15 @@ function dañocontinuo(damage){
 const dañocontinuorep = setInterval(function() {
     dañocontinuo(player.caracteristicas.daño);}, 500);
 
-function muerteboss(){ 
+function muerteboss(){
 
     let aleatorio = Math.floor(Math.random()*listabossessinusar.length);
-        if (saludqueda<=0){  
-            boss.src = listabossessinusar[aleatorio];  
+        if (saludqueda<=0){
+            boss.src = listabossessinusar[aleatorio];
 
         //ELIMINAR EL BOSS DE LA LISTA NORMAL PARA QUE NO SE REPITAN.
-        listabossessinusar.splice(aleatorio,1);     
-        
+        listabossessinusar.splice(aleatorio,1);
+
             if (listabossessinusar.length===0){
                 listabossessinusar=[].concat(slimes);
             }
@@ -214,18 +226,17 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+                        ui.bossAudio.play();
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
                         player.progresion.contadormuertosboss+=1;
                         boss10ejecutado = true;
                         boss10aparecer = false;
-                        alert("Enhorabuena, has matado al elemental de sombra."); 
+                        alert("Enhorabuena, has matado al elemental de sombra.");
                         multOro = multOro*10;
-                    }  
-           
+                    }
+
             barrainicial=60;
             saludinicial+=1;
             vidainicial+=1;
@@ -234,38 +245,38 @@ function muerteboss(){
             player.progresion.etapa+=1;
 
 
-        
+
             // AGREGAR LA Oro POR CADA BOSS.
-            player.economia.oro += 1*multOro;    
-            
+            player.economia.oro += 1*multOro;
+
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            ui.multDanoTexto.innerText=player.caracteristicas.daño;
+            ui.oroTexto.innerText =player.economia.oro;
+            ui.multPuntosTexto.innerText =player.progresion.etapa;
 
-            textdaño_oro.innerText = player.economia.oro;
+            ui.textDañoOro.innerText = player.economia.oro;
 
         } }
 
 //*FUNCION PARA QUE CUANDO HAGA CLICK APAREZCA LA IMAGEN
-document.getElementById('boss').addEventListener('click', function() {
+boss.addEventListener('click', function() {
     //PRIMERO COGEMOS LA IMAGEN DEL ATAQUE
-    const attackImg = document.getElementById('ataquealboss');
+    // ui.attackImg is already cached
 
     // VOY A PONERLE QUE APAREZCA DE MANERA ALEATORIO CON UN MARGEN
     let ataque_izquierda=Math.floor(Math.random()*(50-20)+20)
     let ataque_abajo=Math.floor(Math.random()*(50-20)+20)
     //AQUI LE DAMOS LA POSICION EN EL CSS A LA IMAGEN DE ATAQUE.
-    attackImg.style.left = ataque_izquierda + "%";
-    attackImg.style.bottom = ataque_abajo +"%";
+    ui.attackImg.style.left = ataque_izquierda + "%";
+    ui.attackImg.style.bottom = ataque_abajo +"%";
 
     //APARECE LA IMAGEN DE ATAQUE.
-    attackImg.style.display = 'block';
+    ui.attackImg.style.display = 'block';
 
     // A LOS 500ms DESAPARECE DE NUEVO ESTA IMAGEN QUITANDOLA EN EL CSS
     setTimeout(function() {
-        attackImg.style.display = 'none';
+        ui.attackImg.style.display = 'none';
     }, 200);
 });
 
@@ -277,18 +288,18 @@ comprardaño.addEventListener("click",function(){
         player.economia.oro-=1
         player.caracteristicas.daño+=1;
         }
-    
+
     else if(player.caracteristicas.daño>=10 && player.economia.oro>=10){
         player.economia.oro-=10
         player.caracteristicas.daño+=1;
         }
-        
+
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
-        textdaño_oro.innerText = player.economia.oro;
-        textdaño.innerText = player.caracteristicas.daño;
+        ui.multDanoTexto.innerText=player.caracteristicas.daño;
+        ui.oroTexto.innerText =player.economia.oro;
+        ui.textDañoOro.innerText = player.economia.oro;
+        ui.textDaño.innerText = player.caracteristicas.daño;
 
 
 })
@@ -351,7 +362,6 @@ document.getElementById('espec2').addEventListener('click', function() {
 document.getElementById('salvar-partida').addEventListener('click', function() {
     //GENERAMOS UNA LISTA CON EL OBJETO DESEADO
     player_lista = JSON.stringify(player);
-    //GUARDAMOS EN NUESTRO LOCAL STORE.º    
+    //GUARDAMOS EN NUESTRO LOCAL STORE.º
     localStorage.setItem(player.nombre,player_lista)
 });
-
