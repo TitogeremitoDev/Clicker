@@ -37,6 +37,17 @@ const audiohome = document.getElementById('audiohome');
 cualquierlugar[0].addEventListener('click', function() {
         audiohome.play();
 });
+
+// Cache frequently accessed DOM elements
+const ui = {
+    salud: document.getElementById("salud"),
+    saludTieneTexto: document.getElementById("salud-tiene-texto"),
+    saludTotalTexto: document.getElementById("salud-total-texto"),
+    oroTexto: document.querySelector(".oro-texto"),
+    multDañoTexto: document.querySelector(".mult-daño-texto"),
+    multPuntosTexto: document.querySelector(".mult-puntos-texto")
+};
+
 //! VARIABLES DE LA PANTALLA DE MEJORAS
 let comprardaño=document.getElementById("comprar_mejora_daño");
 
@@ -167,13 +178,13 @@ boss.addEventListener("click",function(){
     hit.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+    let barra=ui.salud;
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    ui.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    ui.saludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +192,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    let barra=ui.salud;
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    ui.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    ui.saludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -240,9 +251,9 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            ui.multDañoTexto.innerText=player.caracteristicas.daño;
+            ui.oroTexto.innerText =player.economia.oro;
+            ui.multPuntosTexto.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
