@@ -1,0 +1,3 @@
+## 2025-02-23 - [DOM Query Caching Optimization]
+**Learning:** Found significant overhead from high-frequency (500ms `setInterval` + unthrottled rapid clicking) DOM queries inside the `dañocontinuo` game loop. `clicker.js` uses `defer` in `index.html`, which guarantees that the DOM has been parsed when the script executes.
+**Action:** Top-level global caching in vanilla JS is perfectly safe here due to `defer`, turning repeated `document.getElementById` and `document.querySelector` lookups into direct variable access. Always cache frequently accessed elements in high-frequency game loops, especially if they involve user-driven rapid clicks.
