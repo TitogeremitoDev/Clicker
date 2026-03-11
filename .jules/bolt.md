@@ -1,0 +1,3 @@
+## 2024-05-24 - [DOM Query Caching Anti-Pattern]
+**Learning:** The codebase relies heavily on implicitly generating variables from HTML IDs (e.g. `daño`), and functions like `dañocontinuo` run in a 500ms `setInterval` loop repeatedly querying the DOM via `document.getElementById()`. Synthetic tests (`jsdom`) might not show the true impact compared to real browser rendering pipelines.
+**Action:** When working in `clicker.js`, cache DOM references at the top level (e.g. `const ui = { ... }`), since `clicker.js` is included with `defer` in `index.html`. This avoids repeated lookups and global variable confusion.
