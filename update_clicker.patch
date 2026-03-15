@@ -1,0 +1,18 @@
+<<<<<<< SEARCH
+// let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
+=======
+// let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
+
+// ⚡ Bolt: Caching DOM elements to reduce lookup overhead in high-frequency loops (dañocontinuo) and click events.
+const ui = {
+    salud: document.getElementById("salud"),
+    saludTieneTexto: document.getElementById("salud-tiene-texto"),
+    saludTotalTexto: document.getElementById("salud-total-texto"),
+    hit1: document.getElementById("hit1"),
+    gritoboss1: document.getElementById("gritoboss1"),
+    ataqueImg: document.getElementById("ataquealboss"),
+    multDañoTexto: document.querySelector(".mult-daño-texto"),
+    oroTexto: document.querySelector(".oro-texto"),
+    multPuntosTexto: document.querySelector(".mult-puntos-texto")
+};
+>>>>>>> REPLACE
