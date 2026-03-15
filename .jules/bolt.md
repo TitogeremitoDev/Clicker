@@ -1,0 +1,3 @@
+## 2024-05-24 - [DOM Query Caching in High-Frequency Game Loops]
+**Learning:** In vanilla JavaScript games with frequent loops (e.g., `setInterval` running every 500ms like `dañocontinuo`), repeated DOM queries (`document.getElementById`) create a significant performance bottleneck. Because `clicker.js` is loaded with `defer`, we can safely cache these DOM elements at the top level upon initialization.
+**Action:** When working on clicker games or rapid loop implementations, always initialize a global `ui` object (e.g., `const ui = { ... }`) to cache DOM references once at script load instead of querying them continuously within the loop or event handlers.
