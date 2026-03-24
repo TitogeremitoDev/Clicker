@@ -160,20 +160,29 @@ listabossessinusar=[].concat(slimes);
 
 
 
+
+// ⚡ Bolt: Cache DOM elements mapped to frequently accessed nodes
+const elHit1 = document.getElementById("hit1");
+const elSalud = document.getElementById("salud");
+const elSaludTieneTexto = document.getElementById("salud-tiene-texto");
+const elSaludTotalTexto = document.getElementById("salud-total-texto");
+const elBoss1Grito = document.getElementById("gritoboss1");
+const elMultDanoTexto = document.querySelector(".mult-daño-texto");
+const elOroTexto = document.querySelector(".oro-texto");
+const elMultPuntosTexto = document.querySelector(".mult-puntos-texto");
+
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+    elHit1.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elSalud.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +190,13 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,8 +222,7 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+                        elBoss1Grito.play();
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
@@ -240,32 +247,32 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            elMultDanoTexto.innerText=player.caracteristicas.daño;
+            elOroTexto.innerText =player.economia.oro;
+            elMultPuntosTexto.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
         } }
 
 //*FUNCION PARA QUE CUANDO HAGA CLICK APAREZCA LA IMAGEN
-document.getElementById('boss').addEventListener('click', function() {
+const elAtaqueBoss = document.getElementById('ataquealboss');
+boss.addEventListener('click', function() {
     //PRIMERO COGEMOS LA IMAGEN DEL ATAQUE
-    const attackImg = document.getElementById('ataquealboss');
 
     // VOY A PONERLE QUE APAREZCA DE MANERA ALEATORIO CON UN MARGEN
     let ataque_izquierda=Math.floor(Math.random()*(50-20)+20)
     let ataque_abajo=Math.floor(Math.random()*(50-20)+20)
     //AQUI LE DAMOS LA POSICION EN EL CSS A LA IMAGEN DE ATAQUE.
-    attackImg.style.left = ataque_izquierda + "%";
-    attackImg.style.bottom = ataque_abajo +"%";
+    elAtaqueBoss.style.left = ataque_izquierda + "%";
+    elAtaqueBoss.style.bottom = ataque_abajo +"%";
 
     //APARECE LA IMAGEN DE ATAQUE.
-    attackImg.style.display = 'block';
+    elAtaqueBoss.style.display = 'block';
 
     // A LOS 500ms DESAPARECE DE NUEVO ESTA IMAGEN QUITANDOLA EN EL CSS
     setTimeout(function() {
-        attackImg.style.display = 'none';
+        elAtaqueBoss.style.display = 'none';
     }, 200);
 });
 
