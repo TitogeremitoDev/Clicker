@@ -14,7 +14,7 @@ let player = {
         contadormuertos:0,
         contadormuertosboss:0
         },
-    
+
     economia:{
         oro:1,
         gemas:0
@@ -24,7 +24,7 @@ let player = {
         daño: 1
         //AQUI AÑADIREMOS OTRAS CARACTERISTICAS COMO PROB CRITICO O DAÑO CRITICO.
     }
-    
+
 }
 player.nombre = prompt("¿Cual es tu nombre aventurero?");
 
@@ -83,9 +83,9 @@ function actualizarzIndex (zIndexHome, zIndexMejoras, zIndexBoss, zIndexHeroes, 
     fondos.mejoras.style.zIndex = zIndexMejoras;    //1
     fondos.boss.style.zIndex = zIndexBoss;          //2
     fondos.heroes.style.zIndex = zIndexHeroes       //3
-    fondos.compras.style.zIndex=zIndexCompras       //4   
-    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5   
-    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6      
+    fondos.compras.style.zIndex=zIndexCompras       //4
+    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5
+    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6
 }
 
 //HOME
@@ -128,6 +128,14 @@ viajeclasificacion.addEventListener("click",function(){
 
 const boss=document.getElementById("boss")
 
+const barraSaludDOM = document.getElementById("salud");
+const saludTieneTextoDOM = document.getElementById("salud-tiene-texto");
+const saludTotalTextoDOM = document.getElementById("salud-total-texto");
+const hitAudioDOM = document.getElementById("hit1");
+const multDanoTextoDOM = document.querySelector(".mult-daño-texto");
+const oroTextoDOM = document.querySelector(".oro-texto");
+const multPuntosTextoDOM = document.querySelector(".mult-puntos-texto");
+
 
 let barrainicial = 60;
 let vidainicial = 10;
@@ -163,17 +171,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
+    let hit =  hitAudioDOM;
     hit.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+    let barra=barraSaludDOM;
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +189,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    let barra=barraSaludDOM;
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -198,15 +206,15 @@ function dañocontinuo(damage){
 const dañocontinuorep = setInterval(function() {
     dañocontinuo(player.caracteristicas.daño);}, 500);
 
-function muerteboss(){ 
+function muerteboss(){
 
     let aleatorio = Math.floor(Math.random()*listabossessinusar.length);
-        if (saludqueda<=0){  
-            boss.src = listabossessinusar[aleatorio];  
+        if (saludqueda<=0){
+            boss.src = listabossessinusar[aleatorio];
 
         //ELIMINAR EL BOSS DE LA LISTA NORMAL PARA QUE NO SE REPITAN.
-        listabossessinusar.splice(aleatorio,1);     
-        
+        listabossessinusar.splice(aleatorio,1);
+
             if (listabossessinusar.length===0){
                 listabossessinusar=[].concat(slimes);
             }
@@ -222,10 +230,10 @@ function muerteboss(){
                         player.progresion.contadormuertosboss+=1;
                         boss10ejecutado = true;
                         boss10aparecer = false;
-                        alert("Enhorabuena, has matado al elemental de sombra."); 
+                        alert("Enhorabuena, has matado al elemental de sombra.");
                         multOro = multOro*10;
-                    }  
-           
+                    }
+
             barrainicial=60;
             saludinicial+=1;
             vidainicial+=1;
@@ -234,15 +242,15 @@ function muerteboss(){
             player.progresion.etapa+=1;
 
 
-        
+
             // AGREGAR LA Oro POR CADA BOSS.
-            player.economia.oro += 1*multOro;    
-            
+            player.economia.oro += 1*multOro;
+
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            multDanoTextoDOM.innerText=player.caracteristicas.daño;
+            oroTextoDOM.innerText =player.economia.oro;
+            multPuntosTextoDOM.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
@@ -277,16 +285,16 @@ comprardaño.addEventListener("click",function(){
         player.economia.oro-=1
         player.caracteristicas.daño+=1;
         }
-    
+
     else if(player.caracteristicas.daño>=10 && player.economia.oro>=10){
         player.economia.oro-=10
         player.caracteristicas.daño+=1;
         }
-        
+
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
+        multDanoTextoDOM.innerText=daño;
+        oroTextoDOM.innerText =player.economia.oro;
         textdaño_oro.innerText = player.economia.oro;
         textdaño.innerText = player.caracteristicas.daño;
 
@@ -351,7 +359,6 @@ document.getElementById('espec2').addEventListener('click', function() {
 document.getElementById('salvar-partida').addEventListener('click', function() {
     //GENERAMOS UNA LISTA CON EL OBJETO DESEADO
     player_lista = JSON.stringify(player);
-    //GUARDAMOS EN NUESTRO LOCAL STORE.º    
+    //GUARDAMOS EN NUESTRO LOCAL STORE.º
     localStorage.setItem(player.nombre,player_lista)
 });
-
