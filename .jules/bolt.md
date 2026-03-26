@@ -1,0 +1,3 @@
+## 2024-05-19 - Caching repeated DOM queries on extremely hot paths in Vanilla JS apps
+**Learning:** Repetitive calls to `document.getElementById` and `document.querySelector` on hot paths like intervals (e.g. `setInterval` running every 500ms) and user click events heavily degrade performance in Vanilla JS, by synchronously blocking the main thread. Caching DOM queries in the global scope eliminates this completely. Ensure these variables are assigned after the DOM is rendered or properly scoped.
+**Action:** When auditing vanilla JS, always search for `setInterval` and click handlers mapping directly to DOM queries and extract the queries into cached variables at the top of the file.
