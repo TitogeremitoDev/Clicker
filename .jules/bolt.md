@@ -1,0 +1,3 @@
+## 2024-05-19 - Caching High-Frequency DOM Elements
+**Learning:** Found an anti-pattern in the clicker application where rapid clicking and `setInterval` loops continuously trigger synchronous DOM lookups (like `document.getElementById` and `document.querySelector`). This causes large latency spikes and CPU spikes when users spam clicks, blocking the main thread from updating properly.
+**Action:** Next time, carefully identify high-frequency events (like `onMouseMove` or `onClick` in a clicker game) and `setInterval`/`requestAnimationFrame` loops. Pre-cache any repeatedly referenced DOM elements outside the function body.
