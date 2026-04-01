@@ -1,0 +1,3 @@
+## 2024-05-14 - Repeated DOM Queries in High-Frequency Vanilla JS Event Loops
+**Learning:** Querying the DOM repeatedly using `document.getElementById` and `document.querySelector` inside high-frequency event loops, such as a fast `setInterval` game loop or a frantic click event listener like a `boss` click handler in a clicker game, creates unnecessary CPU overhead. The DOM tree is traversed on every call.
+**Action:** Always cache these DOM queries in variables outside the loop or event listener to avoid repeated layout thrashing and DOM traversal overhead, especially when writing vanilla JavaScript.
