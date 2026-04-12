@@ -1,0 +1,244 @@
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-boss.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-home.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-mejoras.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-heroes.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-compras.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-configuracion.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker-clasificacion.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Fondos/cabana.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Monstruos/slimes/0%20(1).png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Attack.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/GUERRERO.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] code 404, message File not found
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/paladin.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /clicker.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/Hunter.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/Druida.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/Mage.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Heroes/GOD.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Fondos/fondobody.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /Fondos/bosque.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /mesa.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:55:46] "GET /home-music.mp3 HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 41860)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/biblioteca.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /maderaestropeada.avif HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono_da%C3%B1o.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /moneda.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono_da%C3%B1o_crit.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/configuracion.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/salatesoro.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/fondo-boss.gif HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/salaheroes.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /Fondos/fondo-clasificacion.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono-espada.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono_cd.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono_porc__crit.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /icono_da%C3%B1o_mag.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /gritoboss1.mp3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:02] "GET /hit1.mp3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:56:05] "GET /home-music.mp3 HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 53064)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+127.0.0.1 - - [12/Apr/2026 18:56:37] "GET /Monstruos/slimes/0%20(9).png HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 58518)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-boss.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-home.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-mejoras.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-heroes.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-compras.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-configuracion.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker-clasificacion.css HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Fondos/cabana.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Monstruos/slimes/0%20(1).png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Attack.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/GUERRERO.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] code 404, message File not found
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/paladin.png HTTP/1.1" 404 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /clicker.js HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/Hunter.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/Druida.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/Mage.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /Heroes/GOD.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:30] "GET /home-music.mp3 HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 39040)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /gritoboss1.mp3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /hit1.mp3 HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/fondobody.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/bosque.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /mesa.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/fondo-boss.gif HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/salatesoro.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/salaheroes.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/fondo-clasificacion.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/biblioteca.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /Fondos/configuracion.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono-espada.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /maderaestropeada.avif HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /moneda.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono_da%C3%B1o_crit.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono_cd.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono_da%C3%B1o_mag.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono_porc__crit.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:45] "GET /icono_da%C3%B1o.png HTTP/1.1" 200 -
+127.0.0.1 - - [12/Apr/2026 18:58:47] "GET /home-music.mp3 HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 46668)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+ConnectionResetError: [Errno 104] Connection reset by peer
+----------------------------------------
+127.0.0.1 - - [12/Apr/2026 18:58:53] "GET /Monstruos/slimes/0%20(13).png HTTP/1.1" 200 -
+----------------------------------------
+Exception occurred during processing of request from ('127.0.0.1', 36980)
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 318, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 349, in process_request
+    self.finish_request(request, client_address)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 362, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 676, in __init__
+    super().__init__(*args, **kwargs)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 766, in __init__
+    self.handle()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 440, in handle
+    self.handle_one_request()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 428, in handle_one_request
+    method()
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 683, in do_GET
+    self.copyfile(f, self.wfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/http/server.py", line 882, in copyfile
+    shutil.copyfileobj(source, outputfile)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/shutil.py", line 204, in copyfileobj
+    fdst_write(buf)
+  File "/home/jules/.pyenv/versions/3.12.13/lib/python3.12/socketserver.py", line 845, in write
+    self._sock.sendall(b)
+BrokenPipeError: [Errno 32] Broken pipe
+----------------------------------------
