@@ -1,0 +1,3 @@
+## 2024-05-24 - DOM Query Optimization
+**Learning:** Frequent DOM queries inside event listeners (like 'click' events) or interval functions (like `setInterval`) can lead to performance bottlenecks because `document.getElementById` and `document.querySelector` traverse the DOM tree every time they are called.
+**Action:** When working with vanilla JS, cache DOM elements in variables outside the scope of frequently-called functions. This ensures the DOM is queried only once, rather than upon every interaction or interval tick.
