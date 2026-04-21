@@ -128,6 +128,14 @@ viajeclasificacion.addEventListener("click",function(){
 
 const boss=document.getElementById("boss")
 
+// Cached DOM elements for performance
+const hitAudio = document.getElementById("hit1");
+const barraSalud = document.getElementById("salud");
+const textSaludTiene = document.getElementById("salud-tiene-texto");
+const textSaludTotal = document.getElementById("salud-total-texto");
+const attackImg = document.getElementById("ataquealboss");
+const boss1gritoAudio = document.getElementById("gritoboss1");
+
 
 let barrainicial = 60;
 let vidainicial = 10;
@@ -163,32 +171,28 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+    hitAudio.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    barraSalud.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    textSaludTiene.textContent=saludqueda.toFixed(2);
+    textSaludTotal.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
 
-
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    barraSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    textSaludTiene.textContent=saludqueda.toFixed(2);
+    textSaludTotal.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,8 +218,7 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+                        boss1gritoAudio.play();
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
@@ -249,9 +252,7 @@ function muerteboss(){
         } }
 
 //*FUNCION PARA QUE CUANDO HAGA CLICK APAREZCA LA IMAGEN
-document.getElementById('boss').addEventListener('click', function() {
-    //PRIMERO COGEMOS LA IMAGEN DEL ATAQUE
-    const attackImg = document.getElementById('ataquealboss');
+boss.addEventListener("click", function() {
 
     // VOY A PONERLE QUE APAREZCA DE MANERA ALEATORIO CON UN MARGEN
     let ataque_izquierda=Math.floor(Math.random()*(50-20)+20)
