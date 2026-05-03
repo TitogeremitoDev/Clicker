@@ -1,0 +1,3 @@
+## 2024-05-14 - Caching DOM elements for hot paths in continuous loops
+**Learning:** DOM query methods like `document.getElementById` or `document.querySelector` are expensive and should not be invoked inside continuous loops (like a `setInterval` triggering every 500ms) or frequent event listeners (like quick mouse clicking in a clicker game).
+**Action:** Extract these queries into variables at the top of the file, outside of the hot paths. This reduces CPU usage during execution since the browser has less recalculation and querying work to do.
