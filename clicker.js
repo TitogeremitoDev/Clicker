@@ -128,6 +128,16 @@ viajeclasificacion.addEventListener("click",function(){
 
 const boss=document.getElementById("boss")
 
+const hitSound = document.getElementById("hit1");
+const barraSalud = document.getElementById("salud");
+const saludTieneTexto = document.getElementById("salud-tiene-texto");
+const saludTotalTexto = document.getElementById("salud-total-texto");
+const gritoboss1 = document.getElementById("gritoboss1");
+const multDanioTexto = document.querySelector(".mult-daño-texto");
+const oroTextoElements = document.querySelectorAll(".oro-texto");
+const oroTexto = oroTextoElements.length > 0 ? oroTextoElements[0] : null;
+const multPuntosTexto = document.querySelector(".mult-puntos-texto");
+
 
 let barrainicial = 60;
 let vidainicial = 10;
@@ -139,7 +149,7 @@ let saludqueda = 10;
 let multOro =1
 
 
-document.querySelector(".oro-texto").innerText =player.economia.oro;
+if (oroTexto) { oroTextoElements.forEach(el => el.innerText = player.economia.oro); }
 
 // let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
 
@@ -163,17 +173,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+    if (hitSound) { hitSound.currentTime = 0; hitSound.play().catch(e => {}); }
+
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    if (barraSalud) { barraSalud.style.width= barrainicial+"%"; }
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    if (saludTieneTexto) { saludTieneTexto.textContent=saludqueda.toFixed(2); }
+    if (saludTotalTexto) { saludTotalTexto.textContent=saludinicial.toFixed(2); }
 
     muerteboss();
 })
@@ -181,14 +191,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    if (barraSalud) { barraSalud.style.width= barrainicial+"%"; }
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    if (saludTieneTexto) { saludTieneTexto.textContent=saludqueda.toFixed(2); }
+    if (saludTotalTexto) { saludTotalTexto.textContent=saludinicial.toFixed(2); }
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,8 +224,8 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+                        if (gritoboss1) { gritoboss1.currentTime = 0; gritoboss1.play().catch(e => {}); }
+
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
@@ -240,9 +250,9 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            if (multDanioTexto) { multDanioTexto.innerText=player.caracteristicas.daño; }
+            if (oroTexto) { oroTextoElements.forEach(el => el.innerText = player.economia.oro); }
+            if (multPuntosTexto) { multPuntosTexto.innerText =player.progresion.etapa; }
 
             textdaño_oro.innerText = player.economia.oro;
 
@@ -285,8 +295,8 @@ comprardaño.addEventListener("click",function(){
         
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
+        if (multDanioTexto) { multDanioTexto.innerText=player.caracteristicas.daño; }
+        if (oroTexto) { oroTextoElements.forEach(el => el.innerText = player.economia.oro); }
         textdaño_oro.innerText = player.economia.oro;
         textdaño.innerText = player.caracteristicas.daño;
 
