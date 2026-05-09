@@ -126,8 +126,13 @@ viajeclasificacion.addEventListener("click",function(){
     actualizarzIndex(0,0,0,0,0,0,1)
     })
 
-const boss=document.getElementById("boss")
-
+// ⚡ Bolt Optimization: Cache DOM queries to avoid expensive lookups during high-frequency events (clicks and intervals)
+const boss=document.getElementById("boss");
+const elHit = document.getElementById("hit1");
+const elBarra = document.getElementById("salud");
+const elSaludTieneTexto = document.getElementById("salud-tiene-texto");
+const elSaludTotalTexto = document.getElementById("salud-total-texto");
+const elBoss1Grito = document.getElementById("gritoboss1");
 
 let barrainicial = 60;
 let vidainicial = 10;
@@ -163,17 +168,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+
+    elHit.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elBarra.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +186,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elBarra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,8 +219,8 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
-                        boss1grito.play();
+
+                        elBoss1Grito.play();
                         boss10aparecer =true;}
 
                     if (boss10aparecer===true && saludqueda<=0 && player.progresion.etapa===10){
