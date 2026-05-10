@@ -44,6 +44,18 @@ let comprardaño=document.getElementById("comprar_mejora_daño");
 let textdaño = document.getElementById("texto-daño-actual");
 let textdaño_oro = document.getElementById("texto-daño-actual_oro");
 
+// DOM Elements caching for performance optimization
+const barraSaludDOM = document.getElementById("salud");
+const saludTieneTextoDOM = document.getElementById("salud-tiene-texto");
+const saludTotalTextoDOM = document.getElementById("salud-total-texto");
+const hit1DOM = document.getElementById("hit1");
+const multDanioTextoDOM = document.querySelector(".mult-daño-texto");
+const oroTextoDOM = document.querySelector(".oro-texto");
+const multPuntosTextoDOM = document.querySelector(".mult-puntos-texto");
+const ataqueAlBossDOM = document.getElementById("ataquealboss");
+const gritoboss1DOM = document.getElementById("gritoboss1");
+
+
 
 //! TODA LA PARTE DE CAMBIAR DE PANTALLA
 const home=document.getElementsByClassName("returnhome")
@@ -139,9 +151,9 @@ let saludqueda = 10;
 let multOro =1
 
 
-document.querySelector(".oro-texto").innerText =player.economia.oro;
+oroTextoDOM.innerText =player.economia.oro;
 
-// let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
+// let Oro = parseInt(oroTextoDOM.innerText,10);
 
 const slimes= ["Monstruos/slimes/0 (1).png","Monstruos/slimes/0 (2).png","Monstruos/slimes/0 (3).png",
                "Monstruos/slimes/0 (4).png","Monstruos/slimes/0 (5).png","Monstruos/slimes/0 (6).png",
@@ -163,17 +175,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
+    let hit =  hit1DOM;
     hit.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+    let barra=barraSaludDOM;
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +193,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    let barra=barraSaludDOM;
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -214,7 +226,7 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
+                        let boss1grito =  gritoboss1DOM;
                         boss1grito.play();
                         boss10aparecer =true;}
 
@@ -240,9 +252,9 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            multDanioTextoDOM.innerText=player.caracteristicas.daño;
+            oroTextoDOM.innerText =player.economia.oro;
+            multPuntosTextoDOM.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
@@ -251,7 +263,7 @@ function muerteboss(){
 //*FUNCION PARA QUE CUANDO HAGA CLICK APAREZCA LA IMAGEN
 document.getElementById('boss').addEventListener('click', function() {
     //PRIMERO COGEMOS LA IMAGEN DEL ATAQUE
-    const attackImg = document.getElementById('ataquealboss');
+    const attackImg = ataqueAlBossDOM;
 
     // VOY A PONERLE QUE APAREZCA DE MANERA ALEATORIO CON UN MARGEN
     let ataque_izquierda=Math.floor(Math.random()*(50-20)+20)
@@ -285,8 +297,8 @@ comprardaño.addEventListener("click",function(){
         
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
+        multDanioTextoDOM.innerText=daño;
+        oroTextoDOM.innerText =player.economia.oro;
         textdaño_oro.innerText = player.economia.oro;
         textdaño.innerText = player.caracteristicas.daño;
 
