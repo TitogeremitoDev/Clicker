@@ -1,0 +1,3 @@
+## 2024-05-15 - Cache frequently accessed DOM elements
+**Learning:** Repetitive DOM traversal in game loops (e.g., functions called on "click" or via `setInterval` running every 500ms) is a significant performance bottleneck that can impact responsiveness. In this clicker game, querying `document.getElementById` and `document.querySelector` within these hot paths degraded performance unnecessarily.
+**Action:** Always cache DOM elements that are accessed frequently, ideally defining them once at initialization. Avoid repetitive DOM queries in loops or event listeners to ensure smoother execution.
