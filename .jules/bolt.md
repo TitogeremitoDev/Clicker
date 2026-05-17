@@ -1,0 +1,3 @@
+## 2024-05-24 - [DOM Query Caching for High-Frequency Events]
+**Learning:** In a clicker game architecture, high-frequency events (like intervals triggering every 500ms or rapid user clicks) represent critical performance bottlenecks. Repeatedly querying the DOM (using `document.getElementById` or `document.querySelector`) within these hot paths causes unnecessary layout thrashing and CPU overhead.
+**Action:** Always cache references to DOM elements that are updated frequently (like health bars, text indicators, or click-feedback images) at the module or component level, rather than re-querying them on every tick or click.
