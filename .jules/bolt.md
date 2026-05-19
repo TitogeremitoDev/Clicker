@@ -1,0 +1,3 @@
+## 2024-05-18 - Caching DOM elements in hot paths
+**Learning:** Frequent DOM queries like `document.getElementById` or `document.querySelector` inside high-frequency event listeners (like click events in a clicker game) or fast intervals (`setInterval` running every 500ms) can create a performance bottleneck. The overhead of repeatedly traversing the DOM to find identical elements wastes CPU cycles and can reduce framerates.
+**Action:** Always cache frequently accessed static DOM elements globally outside of event listeners and loops, particularly in performance-critical sections like click handlers in games or animations.
