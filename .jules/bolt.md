@@ -1,0 +1,3 @@
+## 2024-05-22 - Optimizing DOM Lookups in Vanilla JS Game Loops
+**Learning:** In vanilla JavaScript projects with high-frequency event listeners (like clicker games) and background loops (`setInterval`), repeatedly querying the DOM using `document.getElementById` inside these hot paths is a significant performance bottleneck.
+**Action:** Always cache frequently accessed DOM elements at the global/module scope during initialization instead of querying them inside event listeners or tick functions. Also, delay expensive math calculations (like `Math.random`) until they are strictly necessary based on application state.
