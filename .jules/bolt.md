@@ -1,0 +1,3 @@
+## 2024-05-25 - DOM Query Caching on Hot Paths
+**Learning:** In a clicker game, executing `document.getElementById` on every fast-paced user interaction (like a click) and in intervals (like every 500ms for continuous damage) introduces an unnecessary performance bottleneck. Browsers handle DOM lookups quickly, but repeated lookups of the same elements on the hot path sum up, especially in applications that register multiple clicks per second or run game loops.
+**Action:** Always extract and cache repeated DOM element lookups to the outer scope to perform the query only once during initialization.
