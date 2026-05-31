@@ -1,0 +1,3 @@
+## 2024-03-24 - DOM Queries in Loops Overhead
+**Learning:** Calling `document.getElementById` or `document.querySelector` inside frequently triggered events (like click handlers) and intervals (`setInterval`) causes measurable performance overhead due to constant DOM tree traversal, especially in older browsers or complex DOMs.
+**Action:** Always cache frequently accessed DOM elements into variables at the highest possible scope when they are expected to be accessed repeatedly.
