@@ -1,0 +1,3 @@
+## 2024-06-01 - DOM Caching Optimization in Vanilla JS Clicker
+**Learning:** Found an unoptimized vanilla JS pattern where `document.getElementById` and `document.querySelector` were called repeatedly inside high-frequency event listeners (like a clicker button clicked multiple times per second and an interval loop running every 500ms).
+**Action:** When working with vanilla JS games or highly interactive components without a virtual DOM, always extract static DOM lookups to top-level constants at initialization. Also learned that when dealing with HTML5 `<audio>` elements for rapid sound effects (like clicking), resetting `currentTime = 0` before calling `play()` is crucial so consecutive rapid clicks produce sound consistently.
