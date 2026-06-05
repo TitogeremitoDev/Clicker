@@ -1,0 +1,3 @@
+## 2024-06-05 - DOM Query Caching in High-Frequency Event Handlers
+**Learning:** In a clicker game architecture, the main `click` event handlers (like clicking the boss) and the game loop (like `setInterval` for continuous damage) fire at an extremely high frequency. Running standard DOM queries (`document.getElementById`) inside these hot paths creates a significant, unnecessary performance bottleneck and can cause micro-stutters during rapid clicking.
+**Action:** Always cache DOM elements at the script's top level (when safe, e.g., using `defer`) instead of querying the DOM repeatedly inside frequent event handlers or game loops.
