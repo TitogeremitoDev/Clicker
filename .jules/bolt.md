@@ -1,0 +1,3 @@
+## 2024-06-07 - Cache DOM queries in high-frequency event listeners
+**Learning:** In clicker games, performing `document.getElementById` or `document.querySelector` inside the main click handler or rapid intervals (like every 500ms) can severely block the main thread, leading to noticeable jank. The DOM tree must be parsed each time for these redundant queries.
+**Action:** Always cache frequently accessed DOM elements outside the event loop in variables (e.g. `const elSalud = document.getElementById("salud");`), especially in high-interaction components like clickers or rapid update loops, to avoid repeated parsing and improve performance.
