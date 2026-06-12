@@ -1,0 +1,3 @@
+## 2024-05-15 - Caching DOM elements in high-frequency events
+**Learning:** Querying the DOM (like `document.getElementById` or `document.querySelector`) inside rapid event handlers like `click` or high-frequency game loops (like `setInterval` running every 500ms) causes significant performance bottlenecks. The DOM traversals happen repeatedly, pausing the main thread and potentially dropping frames.
+**Action:** Always cache frequently accessed DOM elements into variables at the top-level (module scope) of the file or component initialization, and reuse those variables inside event listeners and game loops.
