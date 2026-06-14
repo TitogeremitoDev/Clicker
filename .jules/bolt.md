@@ -1,0 +1,3 @@
+## 2026-06-14 - Caching DOM queries in high-frequency events
+**Learning:** In simple clicker games (like this one) with a lot of manual DOM manipulation, querying elements like `document.getElementById` and `document.querySelector` inside `setInterval` or click event listeners causes an unexpected bottleneck by blocking the main thread repeatedly.
+**Action:** Instead of querying the DOM in handlers, I will extract these element references into global constants immediately after they become available, and reuse them during intervals or click actions to speed up event processing and avoid unnecessary GC pressure or layout thrashing.
