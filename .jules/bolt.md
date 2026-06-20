@@ -1,0 +1,3 @@
+## 2024-05-23 - High-Frequency DOM Lookups in Clicker Game Loops
+**Learning:** Repetitive DOM lookups (`document.getElementById`, `document.querySelector`) inside high-frequency execution paths (such as `setInterval` loops running every 500ms or click event listeners triggered repeatedly by user rapid-clicking) cause unnecessary layout thrashing and consume CPU, which is a classic performance bottleneck in simple browser-based games.
+**Action:** Always cache frequently accessed DOM elements outside of these loops at the module or script level so they are queried only once when the script loads, reducing the overhead during gameplay loops.
