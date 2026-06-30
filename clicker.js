@@ -157,23 +157,29 @@ let boss10ejecutado =false;
 const bossesfinales = []
 listabossessinusar=[].concat(slimes);
 
+// CACHED DOM QUERIES FOR HOT PATHS
+const elHit1 = document.getElementById("hit1");
+const elSalud = document.getElementById("salud");
+const elSaludTieneTexto = document.getElementById("salud-tiene-texto");
+const elSaludTotalTexto = document.getElementById("salud-total-texto");
+
 
 
 
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+
+    elHit1.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elSalud.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +187,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    elSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    elSaludTieneTexto.textContent=saludqueda.toFixed(2);
+    elSaludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
