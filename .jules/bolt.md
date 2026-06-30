@@ -1,0 +1,3 @@
+## 2024-11-23 - DOM Query Optimization in Game Loops
+**Learning:** Querying the DOM directly inside of game loops (e.g., `setInterval` ticks or hot paths like high-frequency click handlers) causes significant layout thrashing and redundant lookups, slowing down the game execution.
+**Action:** Extract DOM queries using `document.getElementById` and `document.querySelector` to module-level constants to be cached and re-used efficiently across ticks and click handlers.
