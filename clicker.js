@@ -14,7 +14,7 @@ let player = {
         contadormuertos:0,
         contadormuertosboss:0
         },
-    
+
     economia:{
         oro:1,
         gemas:0
@@ -24,7 +24,7 @@ let player = {
         daño: 1
         //AQUI AÑADIREMOS OTRAS CARACTERISTICAS COMO PROB CRITICO O DAÑO CRITICO.
     }
-    
+
 }
 player.nombre = prompt("¿Cual es tu nombre aventurero?");
 
@@ -83,9 +83,9 @@ function actualizarzIndex (zIndexHome, zIndexMejoras, zIndexBoss, zIndexHeroes, 
     fondos.mejoras.style.zIndex = zIndexMejoras;    //1
     fondos.boss.style.zIndex = zIndexBoss;          //2
     fondos.heroes.style.zIndex = zIndexHeroes       //3
-    fondos.compras.style.zIndex=zIndexCompras       //4   
-    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5   
-    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6      
+    fondos.compras.style.zIndex=zIndexCompras       //4
+    fondos.clasificacion.style.zIndex=zIndexClasificacion       //5
+    fondos.configuracion.style.zIndex=zIndexConfiguracion       //6
 }
 
 //HOME
@@ -128,6 +128,22 @@ viajeclasificacion.addEventListener("click",function(){
 
 const boss=document.getElementById("boss")
 
+// DOM Element Caching for Performance
+const DOM = {
+    hit1: document.getElementById("hit1"),
+    salud: document.getElementById("salud"),
+    saludTieneTexto: document.getElementById("salud-tiene-texto"),
+    saludTotalTexto: document.getElementById("salud-total-texto"),
+    multDañoTexto: document.querySelector(".mult-daño-texto"),
+    oroTexto: document.querySelector(".oro-texto"),
+    multPuntosTexto: document.querySelector(".mult-puntos-texto"),
+    gritoBoss1: document.getElementById("gritoboss1"),
+    ataqueAlBoss: document.getElementById('ataquealboss'),
+    espec1: document.getElementById('espec1'),
+    espec2: document.getElementById('espec2'),
+    espec3: document.getElementById('espec3'),
+    espec4: document.getElementById('espec4')
+};
 
 let barrainicial = 60;
 let vidainicial = 10;
@@ -163,17 +179,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
+    let hit = DOM.hit1;
     hit.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+    let barra = DOM.salud;
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    DOM.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    DOM.saludTotalTexto.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +197,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+    let barra = DOM.salud;
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
     barra.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    DOM.saludTieneTexto.textContent=saludqueda.toFixed(2);
+    DOM.saludTotalTexto.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -198,15 +214,15 @@ function dañocontinuo(damage){
 const dañocontinuorep = setInterval(function() {
     dañocontinuo(player.caracteristicas.daño);}, 500);
 
-function muerteboss(){ 
+function muerteboss(){
 
     let aleatorio = Math.floor(Math.random()*listabossessinusar.length);
-        if (saludqueda<=0){  
-            boss.src = listabossessinusar[aleatorio];  
+        if (saludqueda<=0){
+            boss.src = listabossessinusar[aleatorio];
 
         //ELIMINAR EL BOSS DE LA LISTA NORMAL PARA QUE NO SE REPITAN.
-        listabossessinusar.splice(aleatorio,1);     
-        
+        listabossessinusar.splice(aleatorio,1);
+
             if (listabossessinusar.length===0){
                 listabossessinusar=[].concat(slimes);
             }
@@ -214,7 +230,7 @@ function muerteboss(){
                 //!BOSS ESPECIAL 10
                     if (boss10aparecer===false && player.progresion.etapa === 9){
                         boss.src = bossesEspeciales[0];
-                        let boss1grito =  document.getElementById("gritoboss1");
+                        let boss1grito = DOM.gritoBoss1;
                         boss1grito.play();
                         boss10aparecer =true;}
 
@@ -222,10 +238,10 @@ function muerteboss(){
                         player.progresion.contadormuertosboss+=1;
                         boss10ejecutado = true;
                         boss10aparecer = false;
-                        alert("Enhorabuena, has matado al elemental de sombra."); 
+                        alert("Enhorabuena, has matado al elemental de sombra.");
                         multOro = multOro*10;
-                    }  
-           
+                    }
+
             barrainicial=60;
             saludinicial+=1;
             vidainicial+=1;
@@ -234,15 +250,15 @@ function muerteboss(){
             player.progresion.etapa+=1;
 
 
-        
+
             // AGREGAR LA Oro POR CADA BOSS.
-            player.economia.oro += 1*multOro;    
-            
+            player.economia.oro += 1*multOro;
+
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            DOM.multDañoTexto.innerText=player.caracteristicas.daño;
+            DOM.oroTexto.innerText =player.economia.oro;
+            DOM.multPuntosTexto.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
@@ -251,7 +267,7 @@ function muerteboss(){
 //*FUNCION PARA QUE CUANDO HAGA CLICK APAREZCA LA IMAGEN
 document.getElementById('boss').addEventListener('click', function() {
     //PRIMERO COGEMOS LA IMAGEN DEL ATAQUE
-    const attackImg = document.getElementById('ataquealboss');
+    const attackImg = DOM.ataqueAlBoss;
 
     // VOY A PONERLE QUE APAREZCA DE MANERA ALEATORIO CON UN MARGEN
     let ataque_izquierda=Math.floor(Math.random()*(50-20)+20)
@@ -277,16 +293,16 @@ comprardaño.addEventListener("click",function(){
         player.economia.oro-=1
         player.caracteristicas.daño+=1;
         }
-    
+
     else if(player.caracteristicas.daño>=10 && player.economia.oro>=10){
         player.economia.oro-=10
         player.caracteristicas.daño+=1;
         }
-        
+
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
+        DOM.multDañoTexto.innerText=daño;
+        DOM.oroTexto.innerText =player.economia.oro;
         textdaño_oro.innerText = player.economia.oro;
         textdaño.innerText = player.caracteristicas.daño;
 
@@ -297,52 +313,52 @@ comprardaño.addEventListener("click",function(){
 //SI PINCHAMOS EN LA IMAGEN DEL GUERRERO SU ICONO
 document.getElementById('imagen_guerrero').addEventListener('click', function() {
     //CREAMOS LA CONSTANTE DE EL GUERRERO
-    const imagenespecguerrero = document.getElementById('espec1');
+    const imagenespecguerrero = DOM.espec1;
     //APARECE LA IMAGEN COMPLETA DEL GUERRERO.
     imagenespecguerrero.style.display = 'flex';
 });
 // PARA QUITAR LA IMAGEN PINCHAMOS ESTA VEZ EN EL DIV QUE APARECE
 document.getElementById('espec1').addEventListener('click', function() {
-    const imagenespecguerrero = document.getElementById('espec1');
+    const imagenespecguerrero = DOM.espec1;
     //APARECE LA IMAGEN DE ATAQUE.
     imagenespecguerrero.style.display = 'none';
 });
 
 document.getElementById('imagen_cazador').addEventListener('click', function() {
     //CREAMOS LA CONSTANTE DE EL GUERRERO
-    const imagenespeccazador = document.getElementById('espec3');
+    const imagenespeccazador = DOM.espec3;
     //APARECE LA IMAGEN COMPLETA DEL GUERRERO.
     imagenespeccazador.style.display = 'flex';
 });
 // PARA QUITAR LA IMAGEN PINCHAMOS ESTA VEZ EN EL DIV QUE APARECE
 document.getElementById('espec3').addEventListener('click', function() {
-    const imagenespeccazador = document.getElementById('espec3');
+    const imagenespeccazador = DOM.espec3;
     //APARECE LA IMAGEN DE ATAQUE.
     imagenespeccazador.style.display = 'none';
 })
 
 document.getElementById('imagen_druida').addEventListener('click', function() {
     //CREAMOS LA CONSTANTE DE EL GUERRERO
-    const imagenespecdruida = document.getElementById('espec4');
+    const imagenespecdruida = DOM.espec4;
     //APARECE LA IMAGEN COMPLETA DEL GUERRERO.
     imagenespecdruida.style.display = 'flex';
 });
 // PARA QUITAR LA IMAGEN PINCHAMOS ESTA VEZ EN EL DIV QUE APARECE
 document.getElementById('espec4').addEventListener('click', function() {
-    const imagenespecdruida = document.getElementById('espec4');
+    const imagenespecdruida = DOM.espec4;
     //APARECE LA IMAGEN DE ATAQUE.
     imagenespecdruida.style.display = 'none';
 })
 
 document.getElementById('imagen_paladin').addEventListener('click', function() {
     //CREAMOS LA CONSTANTE DE EL GUERRERO
-    const imagenespecpaladin = document.getElementById('espec2');
+    const imagenespecpaladin = DOM.espec2;
     //APARECE LA IMAGEN COMPLETA DEL GUERRERO.
     imagenespecpaladin.style.display = 'flex';
 });
 // PARA QUITAR LA IMAGEN PINCHAMOS ESTA VEZ EN EL DIV QUE APARECE
 document.getElementById('espec2').addEventListener('click', function() {
-    const imagenespecpaladin = document.getElementById('espec2');
+    const imagenespecpaladin = DOM.espec2;
     //APARECE LA IMAGEN DE ATAQUE.
     imagenespecpaladin.style.display = 'none';
 })
@@ -351,7 +367,6 @@ document.getElementById('espec2').addEventListener('click', function() {
 document.getElementById('salvar-partida').addEventListener('click', function() {
     //GENERAMOS UNA LISTA CON EL OBJETO DESEADO
     player_lista = JSON.stringify(player);
-    //GUARDAMOS EN NUESTRO LOCAL STORE.º    
+    //GUARDAMOS EN NUESTRO LOCAL STORE.º
     localStorage.setItem(player.nombre,player_lista)
 });
-
