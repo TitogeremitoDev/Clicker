@@ -1,0 +1,3 @@
+## 2024-05-24 - [Repeated DOM Lookups in Hot Paths]
+**Learning:** [In a clicker game architecture, rapid user interactions and rapid intervals are common (e.g., clicking the boss, continuous damage intervals). Doing `document.getElementById` and `document.querySelector` on every invocation within these hot paths causes measurable DOM query overhead and potential stutters when rapidly clicking. The codebase pattern didn't cache these elements, leading to unnecessary operations per click.]
+**Action:** [Always extract and cache DOM elements at the module level when they are used within rapid `setInterval` loops or high-frequency event listeners like `click`.]
