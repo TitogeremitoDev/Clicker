@@ -1,0 +1,3 @@
+## 2026-07-22 - Optimize DOM queries inside rapid event listeners
+**Learning:** Repeated DOM queries (`document.getElementById` and `document.querySelector`) inside high-frequency events such as rapid clicking (`boss.addEventListener("click")`) and short-interval loops (`setInterval`) cause measurable performance overhead in vanilla JavaScript games. Re-querying the DOM constantly blocks the main thread unnecessarily.
+**Action:** Always extract and cache these element queries outside the event listeners or interval functions, especially in games or highly interactive applications, to minimize layout thrashing and DOM lookups.
