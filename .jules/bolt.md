@@ -1,0 +1,3 @@
+## 2024-07-25 - DOM Cache Incomplete Coverage
+**Learning:** When applying DOM caching as an optimization for clicker games, ensure you grep for *all* instances of `document.getElementById` and `document.querySelector` that target the exact same selectors throughout the file, rather than just the obvious hot paths (like `setInterval` or main loops). An incomplete replacement can leave hidden performance leaks in secondary event handlers.
+**Action:** Run a `grep` for the exact class/ID string after caching it globally to ensure 100% coverage across the file. Also, always delete custom Python manipulation scripts used for edits before committing.
