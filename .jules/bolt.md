@@ -1,0 +1,1 @@
+## 2024-08-01 - DOM Lookup Caching\n**Learning:** In vanilla JavaScript clicker games, rapid DOM queries (like `document.getElementById`) inside `setInterval` loops or spam-clicked event listeners create unnecessary overhead.\n**Action:** Cache frequently accessed DOM nodes at the top-level scope to avoid redundant tree traversals during intense gameplay loops.
