@@ -1,0 +1,3 @@
+## 2024-08-02 - DOM Query Optimization in clicker.js
+**Learning:** In a clicker game architecture, the core clicking loop and damage intervals execute extremely frequently (e.g., every 500ms or on every user click). Doing `document.getElementById` and `document.querySelector` inside these hot paths causes unnecessary repetitive DOM traversal, contributing to jank and frame drops when clicking rapidly.
+**Action:** Cache frequently accessed DOM elements at the module scope when they are stationary in the DOM, so that event listeners and intervals can access the reference directly instead of querying the DOM repeatedly.
