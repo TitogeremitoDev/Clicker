@@ -1,0 +1,3 @@
+## 2024-05-18 - Caching DOM lookups in JS Clicker games
+**Learning:** In simple JS-based clicker games, DOM queries (e.g. `getElementById`) are often performed on every click or tick. While single lookups are cheap, high-frequency actions like clicks or `setInterval`s (e.g., a 500ms damage tick) can cause significant overhead when the user triggers them rapidly or when multiple intervals stack up.
+**Action:** Always check high-frequency paths (click handlers, `requestAnimationFrame`, and tight `setInterval`s) in vanilla JS for redundant DOM lookups and cache the elements at module scope where possible.
