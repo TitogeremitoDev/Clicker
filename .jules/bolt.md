@@ -1,0 +1,3 @@
+## 2024-08-10 - Cache frequent DOM queries
+**Learning:** Frequent DOM queries (`document.getElementById` and `document.querySelector`) inside hot paths like click handlers and `setInterval` loops can cause layout thrashing and performance degradation, particularly in clicker games where user clicks or game loops are extremely frequent.
+**Action:** Identify expensive inline DOM queries in high-frequency functions and move them to a higher scope (caching them as constants) to prevent redundant parsing and lookup by the browser on every invocation.
