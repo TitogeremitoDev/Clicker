@@ -126,7 +126,11 @@ viajeclasificacion.addEventListener("click",function(){
     actualizarzIndex(0,0,0,0,0,0,1)
     })
 
-const boss=document.getElementById("boss")
+const boss=document.getElementById("boss");
+const hitDOM = document.getElementById("hit1");
+const saludDOM = document.getElementById("salud");
+const saludTieneTextoDOM = document.getElementById("salud-tiene-texto");
+const saludTotalTextoDOM = document.getElementById("salud-total-texto");
 
 
 let barrainicial = 60;
@@ -163,17 +167,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+
+    hitDOM.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    saludDOM.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +185,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    saludDOM.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    saludTieneTextoDOM.textContent=saludqueda.toFixed(2);
+    saludTotalTextoDOM.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
