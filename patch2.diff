@@ -1,0 +1,25 @@
+--- clicker.js
++++ clicker.js
+@@ -166,20 +166,16 @@
+
+ //* FUNCION DE DAÑO AL HACER CLICK.
+ boss.addEventListener("click",function(){
+     //SONIDO AL GOLPEAR ESPADA.
+-    let hit =  document.getElementById("hit1");
+-    hit.play();
++    DOM_hit1.play();
+
+     //BAJAR LA BARRA DE VIDA.
+-    let barra=document.getElementById("salud");
+     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
+-    barra.style.width= barrainicial+"%";
++    DOM_saludBarra.style.width= barrainicial+"%";
+     saludqueda-=player.caracteristicas.daño;
+     //BAJAR PUNTOS DE VIDA
+-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
+-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
++    DOM_saludTieneTexto.textContent=saludqueda.toFixed(2);
++    DOM_saludTotalTexto.textContent=saludinicial.toFixed(2);
+
+     muerteboss();
+ })
