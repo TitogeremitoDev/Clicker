@@ -1,0 +1,3 @@
+## 2024-03-21 - Caching DOM queries for High-Frequency Events
+**Learning:** In vanilla JS clicker games, DOM queries (`document.getElementById` or `document.querySelector`) executed inside extremely high-frequency event handlers (e.g., clicking the boss) and rapid intervals (`setInterval` for continuous damage) cause measurable performance bottlenecks due to constant layout recalculation and DOM tree traversal.
+**Action:** Always pre-fetch and globally cache DOM elements whose content or style properties need frequent reading or updating in high-frequency event loops or event listeners, replacing inline queries to optimize rendering time.
