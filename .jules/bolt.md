@@ -1,0 +1,3 @@
+## 2026-09-02 - Vanilla JS Repeated DOM Querying in Game Loop
+**Learning:** Found that this codebase heavily queries the DOM inside high-frequency event handlers (`click` events) and intervals (`setInterval`). Given the nature of a clicker game where actions happen rapidly, these repeated `getElementById` and `querySelector` calls significantly block the main thread and impact FPS.
+**Action:** Always check the high-frequency execution paths (game loops, rapid click handlers, requestAnimationFrame) for inline DOM queries. Extract and cache them into module-scope variables during initialization to avoid re-querying the DOM.
