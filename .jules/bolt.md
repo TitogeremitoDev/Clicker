@@ -1,0 +1,3 @@
+## 2024-05-18 - Clicker Game DOM Query Optimization
+**Learning:** In highly interactive vanilla JS applications like clicker games, executing synchronous DOM queries (`document.getElementById`, `document.querySelector`) within hot paths like click listeners and tight intervals (e.g. `dañocontinuo` firing every 500ms) will block the main thread and impact FPS/responsiveness.
+**Action:** Always extract static DOM queries to top-level cached variables and reference the variables inside event listeners and game loops. Ensure all local queries are replaced and removed to prevent reference errors (e.g., `attackImg is not defined`).
