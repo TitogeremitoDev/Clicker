@@ -1,0 +1,3 @@
+## 2024-05-24 - Avoiding DOM Query Thrashing in Vanilla JS
+**Learning:** In vanilla JS clicker games without frameworks, frequent DOM queries inside high-frequency event listeners (like rapid-fire mouse clicks) and intervals (like `setInterval` running every few milliseconds for damage over time) cause "thrashing". Each query blocks the main thread momentarily and triggers excessive DOM traversals, creating micro-stutters and drastically reducing performance.
+**Action:** Always cache frequently accessed DOM elements as top-level constants/variables instead of dynamically querying them via `document.getElementById` or `document.querySelector` inside rapidly firing loops or handlers.
