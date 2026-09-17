@@ -1,0 +1,3 @@
+## 2024-05-18 - DOM Query Caching in Clicker Games
+**Learning:** In clicker games where event listeners and intervals fire continuously (multiple times per second), repeating `document.getElementById` or `querySelector` inside the handler causes significant CPU overhead. It leads to laggy responses and dropped frames during rapid clicking.
+**Action:** Always cache DOM elements outside the event handlers and main game loops, and update their properties directly.
