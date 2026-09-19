@@ -1,0 +1,3 @@
+## 2024-05-24 - DOM Caching Initialization Bug
+**Learning:** In Vanilla JS clicker games with multiple script files or inline `<script>` tags, initializing cached DOM elements in the global scope can lead to `ReferenceError`s (or null references) if the DOM is not fully parsed. My first attempt failed because elements were queried before `DOMContentLoaded`.
+**Action:** Always wrap DOM element caching in a `DOMContentLoaded` event listener or execute at the very end of the script to ensure the elements actually exist, storing the references in a globally accessible configuration object (e.g. `domElements`) if they need to be accessed by interval loops or global click handlers.
