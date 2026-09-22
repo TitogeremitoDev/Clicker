@@ -1,0 +1,3 @@
+## 2024-05-24 - DOM Query Bottlenecks in Vanilla JS Clicker Games
+**Learning:** In high-frequency input scenarios (like clicker games), repeated DOM traversal (`document.getElementById`, `document.querySelector`) inside event listeners and tight `setInterval` loops causes significant main thread blocking. Also, rapid successive calls to `.play()` on the same `HTMLAudioElement` fail to overlap unless `.currentTime = 0` is explicitly set before playback.
+**Action:** When optimizing vanilla JS apps with rapid event firing, always hoist DOM queries to the global/module scope to cache the element references. For rapid audio cues, ensure `audioElement.currentTime = 0` is used to allow overlapping playback without waiting for the track to finish.
