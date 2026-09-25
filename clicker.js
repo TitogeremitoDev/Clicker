@@ -136,12 +136,21 @@ const anchovida = 60;
 let saludinicial = 10;
 let saludqueda = 10;
 
+// ⚡ Bolt Cache: Cache DOM queries that are frequently accessed to prevent performance overhead.
+const hitAudio = document.getElementById("hit1");
+const barraSalud = document.getElementById("salud");
+const textSaludTiene = document.getElementById("salud-tiene-texto");
+const textSaludTotal = document.getElementById("salud-total-texto");
+const multDanoTexto = document.querySelector(".mult-daño-texto");
+const oroTexto = document.querySelector(".oro-texto");
+const multPuntosTexto = document.querySelector(".mult-puntos-texto");
+
 let multOro =1
 
 
-document.querySelector(".oro-texto").innerText =player.economia.oro;
+oroTexto.innerText =player.economia.oro;
 
-// let Oro = parseInt(document.querySelector(".oro-texto").innerText,10);
+// let Oro = parseInt(oroTexto.innerText,10);
 
 const slimes= ["Monstruos/slimes/0 (1).png","Monstruos/slimes/0 (2).png","Monstruos/slimes/0 (3).png",
                "Monstruos/slimes/0 (4).png","Monstruos/slimes/0 (5).png","Monstruos/slimes/0 (6).png",
@@ -163,17 +172,17 @@ listabossessinusar=[].concat(slimes);
 //* FUNCION DE DAÑO AL HACER CLICK.
 boss.addEventListener("click",function(){
     //SONIDO AL GOLPEAR ESPADA.
-    let hit =  document.getElementById("hit1");
-    hit.play();
+
+    hitAudio.play();
 
     //BAJAR LA BARRA DE VIDA.
-    let barra=document.getElementById("salud");
+
     barrainicial -= (player.caracteristicas.daño*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    barraSalud.style.width= barrainicial+"%";
     saludqueda-=player.caracteristicas.daño;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    textSaludTiene.textContent=saludqueda.toFixed(2);
+    textSaludTotal.textContent=saludinicial.toFixed(2);
 
     muerteboss();
 })
@@ -181,14 +190,14 @@ boss.addEventListener("click",function(){
 
 //* FUNCION DE DAÑO CONTINO, DEBE SER COMO LA DE HACER CLICK.
 function dañocontinuo(damage){
-    let barra=document.getElementById("salud");
+
     damage = player.caracteristicas.daño*0.1
     barrainicial -= (damage*anchovida)/vidainicial;
-    barra.style.width= barrainicial+"%";
+    barraSalud.style.width= barrainicial+"%";
     saludqueda-=damage;
     //BAJAR PUNTOS DE VIDA
-    document.getElementById("salud-tiene-texto").textContent=saludqueda.toFixed(2);
-    document.getElementById("salud-total-texto").textContent=saludinicial.toFixed(2);
+    textSaludTiene.textContent=saludqueda.toFixed(2);
+    textSaludTotal.textContent=saludinicial.toFixed(2);
     // CONDICIONES CUANDO MUERE EL BOSS.
     muerteboss()
 }
@@ -240,9 +249,9 @@ function muerteboss(){
             
 
             //TENGO QUE ACTUALIZAR TODOS LOS TEXTOS TANTO EN EL BOSS COMO EN MEJORAS. ESTE ES EN EL BOSS
-            document.querySelector(".mult-daño-texto").innerText=player.caracteristicas.daño;
-            document.querySelector(".oro-texto").innerText =player.economia.oro;
-            document.querySelector(".mult-puntos-texto").innerText =player.progresion.etapa;
+            multDanoTexto.innerText=player.caracteristicas.daño;
+            oroTexto.innerText =player.economia.oro;
+            multPuntosTexto.innerText =player.progresion.etapa;
 
             textdaño_oro.innerText = player.economia.oro;
 
@@ -285,8 +294,8 @@ comprardaño.addEventListener("click",function(){
         
 //AQUI TENEMOS DOS EJEMPLOS DE COMO HACER UNA ENTRADA DE TEXTO EN HTML
 
-        document.querySelector(".mult-daño-texto").innerText=daño;
-        document.querySelector(".oro-texto").innerText =player.economia.oro;
+        multDanoTexto.innerText=daño;
+        oroTexto.innerText =player.economia.oro;
         textdaño_oro.innerText = player.economia.oro;
         textdaño.innerText = player.caracteristicas.daño;
 
