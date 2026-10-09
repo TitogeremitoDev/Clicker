@@ -1,0 +1,3 @@
+## 2024-05-19 - Caching DOM elements in Core Game Loop
+**Learning:** In highly interactive applications without a framework (like plain JS clicker games), repeated calls to `document.getElementById` inside high-frequency event listeners (like a mouse click on a target) or intervals can cause unnecessary CPU usage and main thread blocking. Also, attempting to play background audio continuously without checking `.paused` forces internal Media API calls repeatedly.
+**Action:** Cache these DOM elements outside the event listeners/intervals as global constants and always check `.paused` before trying to play a media element repeatedly.
