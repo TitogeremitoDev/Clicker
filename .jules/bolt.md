@@ -1,0 +1,3 @@
+## 2023-10-27 - DOM Element Caching in Hot Paths
+**Learning:** In clicker games where rapid clicking and `setInterval` intervals are central, fetching DOM elements repeatedly inside handlers like `document.getElementById` or `document.querySelector` creates a measurable CPU overhead. Specifically, `clicker.js` was querying multiple elements every time the user clicked or every 500ms when `dañocontinuo` executed.
+**Action:** Cache these DOM queries in an object (e.g., `domCache`) when the script initializes, and use the cached references inside loops, intervals, and frequent event handlers to improve main thread execution speed.
