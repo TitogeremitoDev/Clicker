@@ -1,0 +1,3 @@
+## 2025-10-17 - DOM Caching in Game Loop
+**Learning:** Frequent DOM operations (`document.getElementById`, `document.querySelector`) inside rapid game loops or fast user interactions (like a clicker game click event or continuous interval tick) are significant performance bottlenecks.
+**Action:** Always cache these DOM queries as global or closure-level variables during initialization rather than querying them repeatedly inside the hot path execution loop.
