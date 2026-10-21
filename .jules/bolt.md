@@ -1,0 +1,3 @@
+## 2024-05-18 - Caching DOM lookups in High-Frequency Game Loops
+**Learning:** Performing `document.getElementById` and `document.querySelector` within an event listener fired every click (like `boss.addEventListener("click")`) or an interval firing twice a second (like `dañocontinuo`) results in substantial CPU overhead, causing frame drops and input lag in a browser-based clicker game.
+**Action:** Extract frequently used DOM elements into variables at initialization to avoid querying the DOM inside the update loop or on fast inputs. This decreases CPU usage and ensures smoother frame times without sacrificing codebase readability.
