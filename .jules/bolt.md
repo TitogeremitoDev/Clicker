@@ -1,0 +1,3 @@
+## 2024-05-24 - DOM Query Caching in High-Frequency Game Loops
+**Learning:** In fast-paced games (like clickers), repeated DOM queries (`document.getElementById`, `document.querySelector`) inside rapid event listeners (clicks) and game loop intervals (`setInterval` at 500ms) become significant performance bottlenecks. Audio elements also fail to play on rapid consecutive clicks unless their `.currentTime` is reset.
+**Action:** Always cache DOM elements at the module top level for UI elements manipulated frequently in a game loop. When handling overlapping sound effects on click events, reset `.currentTime = 0` before calling `.play()`.
