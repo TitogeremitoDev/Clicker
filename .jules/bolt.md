@@ -1,0 +1,3 @@
+## 2023-10-29 - Avoid DOM Lookups in High-Frequency Handlers
+**Learning:** In a clicker game where actions like clicking a boss or passive damage happen extremely fast, repeating `document.getElementById` or `document.querySelector` creates measurable overhead. Looking up DOM nodes within `setInterval` loops or frequent click handlers is a massive anti-pattern.
+**Action:** Always cache frequently accessed DOM elements at the module scope level instead of doing live queries on every event loop tick, especially when handling repetitive clicks or `requestAnimationFrame`/`setInterval` based damage updates.
